@@ -62,3 +62,25 @@ fn polynomial<'a>(paras: &'a [f32]) -> Box<dyn Fn(f32) -> f32 + 'a> {
         paras.iter().zip(0..paras.len()).fold(0., |acc, (para, i)| acc + x.powf(i as f32) * para)
     })
 }
+
+/*
+为了使闭包函数的使用脱离paras的生命周期限制，可将paras改为Rc指针，完整程序如下
+*/
+
+// use std::rc::Rc;
+
+
+// fn main() {
+//     let poly_fn = polynomial(
+//         Rc::new((0..3).map(|x| x as f32).collect::<Vec<f32>>())
+//     );
+//     println!("{}", poly_fn(3.0));
+// }
+
+// fn polynomial(paras: Rc<Vec<f32>>) -> Box<dyn Fn(f32) -> f32> {
+//     Box::new(move |x| {
+//         paras.iter().zip(0..paras.len()).fold(0., |acc, (para, i)| acc + x.powf(i as f32) * para)
+//     })
+// }
+
+
