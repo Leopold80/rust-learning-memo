@@ -71,10 +71,11 @@ fn polynomial<'a>(paras: &'a [f32]) -> Box<dyn Fn(f32) -> f32 + 'a> {
 
 
 // fn main() {
-//     let poly_fn = polynomial(
-//         Rc::new((0..3).map(|x| x as f32).collect::<Vec<f32>>())
-//     );
-//     println!("{}", poly_fn(3.0));
+//    let poly_fn = {
+//        let paras = Rc::new(vec![0., 1., 2., 3.]);
+//        polynomial(Rc::clone(&paras))
+//    };
+//    println!("{}", poly_fn(3.0));
 // }
 
 // fn polynomial(paras: Rc<Vec<f32>>) -> Box<dyn Fn(f32) -> f32> {
